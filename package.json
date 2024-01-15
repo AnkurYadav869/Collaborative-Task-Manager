@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.4"
+  },
+  "name": "collaborative-task-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnkurYadav869/Collaborative-Task-Manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnkurYadav869/Collaborative-Task-Manager/issues"
+  },
+  "homepage": "https://github.com/AnkurYadav869/Collaborative-Task-Manager#readme",
+  "description": ""
+}

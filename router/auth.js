@@ -11,11 +11,16 @@ router.post("/signup", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     try {
-        await Users.create({
-            username,
-            password,
-        });
-        res.json({ msg: "User Created" });
+        const userAlreadyDefined = await Users.findOne({ username });
+        if (!userAlreadyDefined) {
+            await Users.create({
+                username,
+                password,
+            });
+            res.json({ msg: "User Created" });
+        } else {
+            res.json({ msg: "User already defined" });
+        }
     } catch (e) {
         console.error(e);
     }

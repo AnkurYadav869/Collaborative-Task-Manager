@@ -10,19 +10,22 @@ router.use(express.json());
 router.post("/signup", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    const email = req.body.email;
     try {
-        const userAlreadyDefined = await Users.findOne({ username });
+        const userAlreadyDefined = await Users.findOne({ username, email });
         if (!userAlreadyDefined) {
             await Users.create({
                 username,
                 password,
+                email,
             });
             res.json({ msg: "User Created" });
         } else {
-            res.json({ msg: "User already defined" });
+            res.status(500).json({ msg: "User already defined" });
         }
     } catch (e) {
         console.error(e);
+        res.status(500).json({ msg: "Something bad happen. Please wait" });
     }
 });
 router.post("/signin", async (req, res) => {
@@ -41,6 +44,9 @@ router.post("/signin", async (req, res) => {
         }
     } catch (e) {
         console.error(e);
+        res.status(500).json({
+            msg: "Something bad happen. please try again soon",
+        });
     }
 });
 

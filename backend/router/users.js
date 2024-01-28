@@ -8,7 +8,8 @@ router.use(express.json());
 router.get("/", async (req, res) => {
     try {
         const users = await Users.find();
-        res.json(users);
+        // res.setHeader("Cache-Control", "no-cache");
+        res.status(200).json(users);
     } catch (e) {
         res.json({ msg: "Something went wrong." });
         console.log("error :" + e);
@@ -20,8 +21,8 @@ router.get("/:userid", async (req, res) => {
         const user = await Users.findOne({ username: userid });
         if (user) {
             res.json(user);
-        }else{
-            res.json({msg : "No user found with username:" + userid})
+        } else {
+            res.json({ msg: "No user found with username:" + userid });
         }
     } catch (e) {
         res.json({ msg: "Something went wrong." });
@@ -38,23 +39,23 @@ router.put("/:userid", async (req, res) => {
             { email, password },
             { new: true }
         );
-        if(user){
-            res.json({user})
+        if (user) {
+            res.json({ user });
         }
     } catch (e) {
         console.log("error :" + e);
         res.json({ msg: "Something went wrong." });
     }
 });
-router.delete("/:userid", async(req, res) => {
-    const userid  = req.params.userid
-    try{
-        const del = await Users.findOneAndDelete({username : userid})
-        if(del){
-            res.json({msg : "User deleted successfully"})
+router.delete("/:userid", async (req, res) => {
+    const userid = req.params.userid;
+    try {
+        const del = await Users.findOneAndDelete({ username: userid });
+        if (del) {
+            res.json({ msg: "User deleted successfully" });
         }
-    }catch(e) {
-        console.log('error :' + e)
+    } catch (e) {
+        console.log("error :" + e);
         res.json({ msg: "Something went wrong." });
     }
 });
